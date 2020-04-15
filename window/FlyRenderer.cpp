@@ -1,12 +1,13 @@
 ﻿
 
 #include "FlyRenderer.h"
+#include "FlyWindow.h"
 
-FlyRenderer *RendererInit(SDL_Window *window, int index, Uint32 flags)//渲染器初始化
+FlyRenderer *RendererInit(FlyWindow *window, int index, Uint32 flags)//渲染器初始化
 {
     FlyRenderer* renderer = (FlyRenderer*)calloc(1, sizeof(FlyRenderer));
-    renderer->r = SDL_CreateRenderer(window, index, flags);//创建SDL渲染器
-    renderer->window_id = SDL_GetWindowID(window);//获取窗口id
+    renderer->r = SDL_CreateRenderer(window->GetWindow(), index, flags);//创建SDL渲染器
+    renderer->window_id = SDL_GetWindowID(window->GetWindow());//获取窗口id
     return renderer;
 }
 

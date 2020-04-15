@@ -87,8 +87,10 @@ public:
     int *GetWidth() { return &this->width; }
     int *GetHeight() { return &this->height; }
 
-    SDL_Window* GetWindow() { return this->window; }
-    FlyRenderer* GetRenderer() { return this->renderer; }
+    Uint32 GetWindowID() { return SDL_GetWindowID(this->window); }
+
+    SDL_Window *GetWindow() { return this->window; }
+    FlyRenderer *GetRenderer() { return this->renderer; }
 
     int GetEventCount() { return this->event_n; }
     Event GetEvent(int index) { return this->event[index]; }

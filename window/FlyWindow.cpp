@@ -28,7 +28,7 @@ FlyWindow::~FlyWindow()
 void FlyWindow::Create(Uint32 flags)//创建窗口
 {
     this->window = SDL_CreateWindow(this->title, this->x, this->y, this->width, this->height, flags);
-    this->renderer = RendererInit(this->window, -1, RENDERER_ACCELERATED);//初始化窗口渲染器
+    this->renderer = RendererInit(this, -1, RENDERER_ACCELERATED);//初始化窗口渲染器
 }
 
 void FlyWindow::SetRenderer(FlyRenderer *renderer)//设置渲染器
@@ -94,7 +94,7 @@ void WindowsMainLoop(const int window_n, ...) //window_n为窗口数量  窗口�
 {
     int i;
     int quit = 0;                                       //退出真假
-    int* destroy = (int*)calloc(window_n, sizeof(int));  //window销毁记录
+    int *destroy = (int*)calloc(window_n, sizeof(int));  //window销毁记录
     int destroy_n = 0;                                  //windows销毁数量
 
     FlyWindow **window = (FlyWindow**)calloc(window_n,sizeof(FlyWindow*));//各个窗口
@@ -142,10 +142,35 @@ int WebMainLoop(FlyWindow *window)
     int quit = 0;//退出
     SDL_Event event;//事件
 
-    static int window_id_cache_count = 0;
-    static Uint32 *window_id_cache = (Uint32*)calloc(0,sizeof(Uint32));
+    static int window_id_cache_count = 0;//要销毁的窗口的数量
+    static Uint32 *window_id_cache = (Uint32*)calloc(0,sizeof(Uint32));//要销毁的窗口记录
 
-    printf("%d\n",window_id_cache_count);
+    //printf("%d\n",window_id_cache_count);
+
+    /*窗口销毁*/
+    if (window_id_cache_count > 0)
+    {
+        int old_count = window_id_cache_count;
+        for (int i = 0; i < window_id_cache_count; i++)
+        {
+            if (window_id_cache[i] == window->GetRenderer()->window_id)
+            {
+                window->~FlyWindow();
+                for (int j = 0; j < window_id_cache_count - i; j++)
+                {
+                    window_id_cache[i + j] = window_id_cache[i + j + 1];
+                    window_id_cache[window_id_cache_count - 1] = NULL;
+                }
+                window_id_cache_count--;
+            }
+        }
+        if (old_count > window_id_cache_count)
+        {
+            quit = 1;//退出
+            return quit;//返回窗口已销毁，函数结束
+        }
+    }
+
 
     if (SDL_PollEvent(&event))//获取事件
     {
@@ -158,24 +183,6 @@ int WebMainLoop(FlyWindow *window)
         case SDL_USEREVENT:
             break;
         case SDL_WINDOWEVENT://窗口事件
-            if (window_id_cache_count > 0)
-            {
-                for (int i = 0; i < window_id_cache_count; i++)
-                {
-                    if (window_id_cache[i] == event.window.windowID)
-                    {
-                        window->~FlyWindow();
-                        for (int j = 0; j < window_id_cache_count - i; j++)
-                        {
-                            window_id_cache[i + j] = window_id_cache[i + j + 1];
-                            window_id_cache[window_id_cache_count - 1] = NULL;
-                        }
-                        window_id_cache_count--;
-                    }
-                }
-                quit = 1;//退出
-                return quit;//返回窗口已销毁，函数结束
-            }
             if (event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(window->GetWindow()))//窗口关闭，且id等于执行事件的窗口
             {
                 window->~FlyWindow();//销毁窗口
