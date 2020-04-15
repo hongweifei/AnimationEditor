@@ -122,8 +122,10 @@ public:
 
 
 
-
+/*多窗口循环*/
 void WindowsMainLoop(const int window_n, ...);
+
+
 int WebMainLoop(FlyWindow *window);
 
 /*退出*/

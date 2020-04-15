@@ -148,7 +148,6 @@
     <ClCompile Include="window\FlyWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FlyWindow.h" />
     <ClInclude Include="window\FlyRenderer.h" />
     <ClInclude Include="window\FlyWindow.h" />
   </ItemGroup>

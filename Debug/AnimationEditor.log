@@ -1,6 +1,2 @@
-﻿  main.cpp
-  system.h
-  FlyRenderer.cpp
-  FlyWindow.cpp
-  正在生成代码...
+﻿  FlyWindow.cpp
   AnimationEditor.vcxproj -> E:\C++Projects\AnimationEditor\Debug\AnimationEditor.exe

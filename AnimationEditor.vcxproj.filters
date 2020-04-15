@@ -32,9 +32,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FlyWindow.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="window\FlyWindow.h">
       <Filter>源文件\Window</Filter>
     </ClInclude>
