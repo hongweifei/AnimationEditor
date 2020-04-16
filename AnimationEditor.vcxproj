@@ -143,13 +143,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="system.cpp" />
     <ClCompile Include="system.h" />
     <ClCompile Include="window\FlyRenderer.cpp" />
     <ClCompile Include="window\FlyWindow.cpp" />
+    <ClCompile Include="window\widget\widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window\FlyRenderer.h" />
     <ClInclude Include="window\FlyWindow.h" />
+    <ClInclude Include="window\widget\widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

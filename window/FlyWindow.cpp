@@ -19,7 +19,6 @@ FlyWindow::FlyWindow(const char *title, int x, int y, int width, int height)
 FlyWindow::~FlyWindow()
 {
     SDL_DestroyWindow(this->window);//销毁SDL窗口
-    SDL_DestroyRenderer(this->renderer->r);//销毁SDL窗口SDL渲染器
     free(this->renderer);//释放窗口渲染器
     free(this);//释放窗口
 }
@@ -28,13 +27,21 @@ FlyWindow::~FlyWindow()
 void FlyWindow::Create(Uint32 flags)//创建窗口
 {
     this->window = SDL_CreateWindow(this->title, this->x, this->y, this->width, this->height, flags);
-    this->renderer = RendererInit(this, -1, RENDERER_ACCELERATED);//初始化窗口渲染器
+    this->renderer = new FlyRenderer(this, RENDERER_ACCELERATED);//初始化窗口渲染器
 }
 
-void FlyWindow::SetRenderer(FlyRenderer *renderer)//设置渲染器
+/*设置渲染器*/
+void FlyWindow::SetRenderer(FlyRenderer *renderer)
 {
     this->renderer = renderer;
 }
+
+/*设置窗口背景颜色*/
+void FlyWindow::SetBackGroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+    this->renderer->SetDrawColor(r, g, b, a);
+}
+
 
 /*设置渲染事件*/
 void FlyWindow::SetRenderEvent(RenderEvent event)
@@ -153,7 +160,7 @@ int WebMainLoop(FlyWindow *window)
         int old_count = window_id_cache_count;
         for (int i = 0; i < window_id_cache_count; i++)
         {
-            if (window_id_cache[i] == window->GetRenderer()->window_id)
+            if (window_id_cache[i] == window->GetRenderer()->GetWindowID())
             {
                 window->~FlyWindow();
                 for (int j = 0; j < window_id_cache_count - i; j++)
@@ -235,12 +242,12 @@ int WebMainLoop(FlyWindow *window)
         window->GetEvent(i)();//执行窗口所有普通事件
 
 
-    RenderClear(window->GetRenderer());
+    window->GetRenderer()->Clear();
 
     
     if (window->GetRenderEvent() != NULL)//渲染事件不为空
         window->GetRenderEvent()(window->GetRenderer());//执行窗口渲染事件
-    RenderPresent(window->GetRenderer());//交换
+    window->GetRenderer()->Present();//交换
     
 
     return quit;//返回程序是否结束，函数结束

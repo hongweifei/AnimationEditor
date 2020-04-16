@@ -103,6 +103,7 @@ public:
     MouseWheelEvent GetMouseWheelEvent() { return this->mouse_wheel_event; }
 
     void SetRenderer(FlyRenderer*);//设置窗口渲染器
+    void SetBackGroundColor(Uint8, Uint8, Uint8, Uint8);//设置窗口背景颜色
 
     /*设置窗口各种事件*/
     void SetRenderEvent(RenderEvent);//设置窗口渲染事件

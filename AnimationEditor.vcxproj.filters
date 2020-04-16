@@ -16,6 +16,15 @@
     <Filter Include="源文件\Window">
       <UniqueIdentifier>{6d41eaee-3c63-467a-a506-ee082ec51843}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Window">
+      <UniqueIdentifier>{fe9bc594-7898-4aff-86b8-46aa90e36cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Window\Widget">
+      <UniqueIdentifier>{ab3905ef-27f2-455b-8b01-1f7051f9a8d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Window\Widget">
+      <UniqueIdentifier>{9795de1c-6423-46a3-84da-27bec9394af0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,13 +39,22 @@
     <ClCompile Include="window\FlyWindow.cpp">
       <Filter>源文件\Window</Filter>
     </ClCompile>
+    <ClCompile Include="window\widget\widget.cpp">
+      <Filter>源文件\Window\Widget</Filter>
+    </ClCompile>
+    <ClCompile Include="system.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="window\FlyWindow.h">
-      <Filter>源文件\Window</Filter>
-    </ClInclude>
     <ClInclude Include="window\FlyRenderer.h">
-      <Filter>源文件\Window</Filter>
+      <Filter>头文件\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="window\FlyWindow.h">
+      <Filter>头文件\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="window\widget\widget.h">
+      <Filter>头文件\Window\Widget</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

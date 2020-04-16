@@ -24,7 +24,7 @@
 #define INIT_EVERYTHING     SDL_INIT_EVERYTHING
 #define INIT_NOPARACHUTE    SDL_INIT_NOPARACHUTE
 
-void SystemInit(Uint32 flags) { SDL_Init(flags); }//初始化各项功能
+int SystemInit(Uint32 flags);//初始化各项功能
 
 
 #endif // !SYSTEM_HEAD
