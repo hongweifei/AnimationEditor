@@ -1,3 +1,0 @@
-﻿  FlyRenderer.cpp
-E:\C++Projects\AnimationEditor\window\FlyRenderer.h(26,23): warning C4091: “extern ”: 没有声明变量时忽略“FlyWindow”的左侧
-  AnimationEditor.vcxproj -> E:\C++Projects\AnimationEditor\Debug\AnimationEditor.exe
